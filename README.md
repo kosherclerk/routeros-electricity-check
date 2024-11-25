@@ -14,7 +14,7 @@ You only need a few things to run it:
 
 ## Script in action 
 
-![Example on different messages](https://github.com/kosherclerk/routeros-electricity-check/raw/master/src/images/messages.png)
+![Example of different messages](https://github.com/kosherclerk/routeros-electricity-check/raw/main/src/images/messages.png)
 
 ## Contributing
 
