@@ -4,8 +4,7 @@
 # dont-require-permissons=yes
 
 :global FuncBlackoutRead do={
- :local currentTimestamp [:timestamp]
- :local currentTime [:pick $currentTimestamp 0 [:find $currentTimestamp "."]]
+ :local currentTime [:totime [:tonum [:timestamp]]]
  :local blackoutTimeOff [/file get <pathtofile>/off.txt contents]
  :local blackoutTimeOn [/file get <pathtofile>/on.txt contents]
  :local blackoutTimeSinceLast ($currentTime - $blackoutTimeOff)

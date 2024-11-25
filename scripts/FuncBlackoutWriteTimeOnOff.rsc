@@ -10,8 +10,7 @@
 } else={
  :set filename "<pathtofile>/off.txt"
 }
-:local blackoutTimestamp [:timestamp]
-:local blackoutTime [:pick $blackoutTimestamp 0 [:find $blackoutTimestamp "."]]
+:local blackoutTime [:totime [:tonum [:timestamp]]]
 :if ([:len [/file find name=$filename]] = 0) do={
  /file print file=$filename
  delay 1
