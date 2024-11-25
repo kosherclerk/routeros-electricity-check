@@ -16,8 +16,13 @@
 /system script run FuncBlackoutWriteTimeOnOff
 /system script run FuncBlackoutReadTime
 :global FuncBlackoutRead
+:global blackoutStatus
 :local blackoutDuration [:pick [$FuncBlackoutRead] 0 [:find [$FuncBlackoutRead] " "]]
-:global textSent "$[$FuncStatus]%0A\E2\9A\A1\F0\9F\94\8B <b>Electricity is back on. UPS is working%0A%0ABlackout duration:  $blackoutDuration</b>"
+:if ($blackoutStatus = $powerOnOff) do={
+ :global textSent "$[$FuncStatus]%0A\E2\9A\A1\F0\9F\94\8B <b>Status has not changed. Probable reboot</b>"
+} else={
+ :global textSent "$[$FuncStatus]%0A\E2\9A\A1\F0\9F\94\8B <b>Electricity is back on. UPS is working%0A%0ABlackout duration:  $blackoutDuration</b>"
+}
 :log warning "[ELECTRICITY] Blackout-hotspot disabled. Exiting power saving mode"
 /interface wireless cap set enabled=no
 /system routerboard settings set cpu-frequency=auto
@@ -28,13 +33,18 @@
 ########
 
 /system script run FuncDeviceStatus
+:global FuncStatus
 :global powerOnOff "off"
 /system script run FuncBlackoutWriteTimeOnOff
 /system script run FuncBlackoutReadTime
 :global FuncBlackoutRead
-:global FuncStatus
+:global blackoutStatus
 :local powerOnDuration [:pick [$FuncBlackoutRead] ([:find [$FuncBlackoutRead] " "]+1) [:len [$FuncBlackoutRead]]]
-:global textSent "$[$FuncStatus]%0A\E2\9D\8C\F0\9F\94\8B <b>Electricity is down. UPS is working%0A%0APower on duration:  $powerOnDuration</b>"
+:if ($blackoutStatus = $powerOnOff) do={
+ :global textSent "$[$FuncStatus]%0A\E2\9D\8C\F0\9F\94\8B <b>Status has not changed. Probable reboot</b>"
+} else={
+ :global textSent "$[$FuncStatus]%0A\E2\9D\8C\F0\9F\94\8B <b>Electricity is down. UPS is working%0A%0APower on duration:  $powerOnDuration</b>"
+}
 :log warning "[ELECTRICITY] Blackout-hotspot enabled. Entering power saving mode"
 /interface wireless cap set enabled=yes
 /system routerboard settings set cpu-frequency=448MHz

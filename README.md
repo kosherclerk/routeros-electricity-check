@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project provides scripts for RouterOS to monitor the availability of electricity using a single device without the need of external servers or anything other than RouterOS scripting language.
+This project provides scripts for RouterOS to monitor the availability of electricity using a Mikrotik ROS device and any other pingable LAN device without using any external servers.
 
 ## Requirements
 
