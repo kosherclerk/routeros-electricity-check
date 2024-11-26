@@ -24,7 +24,11 @@
  :global textSent "$[$FuncStatus]%0A\E2\9A\A1\F0\9F\94\8B <b>Electricity is back on. UPS is working%0A%0ABlackout duration:  $blackoutDuration</b>"
 }
 :log warning "[ELECTRICITY] Blackout-hotspot disabled. Exiting power saving mode"
-/interface wireless cap set enabled=no
+# old capsman
+# /interface wireless cap set enabled=no
+# new capsman
+# /interface wifi set [find name~"wifi"] disabled=yes
+/interface wifi set [find name~"wifi"] disabled=yes
 /system routerboard settings set cpu-frequency=auto
 /system script run SendToTelegram
 
@@ -46,6 +50,10 @@
  :global textSent "$[$FuncStatus]%0A\E2\9D\8C\F0\9F\94\8B <b>Electricity is down. UPS is working%0A%0APower on duration:  $powerOnDuration</b>"
 }
 :log warning "[ELECTRICITY] Blackout-hotspot enabled. Entering power saving mode"
-/interface wireless cap set enabled=yes
+# old capsman
+# /interface wireless cap set enabled=yes
+# new capsman
+# /interface wifi set [find name~"wifi"] disabled=no
+/interface wifi set [find name~"wifi"] disabled=no
 /system routerboard settings set cpu-frequency=448MHz
 /system script run SendToTelegram
